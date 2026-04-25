@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoGrab | Peer-to-Peer Bike Rentals</title>
+    <meta name="description" content="Rent bikes directly from owners at affordable prices or list your own bike to earn money.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-motorcycle"></i>
+                Go<span class="highlight">Grab</span>
+            </a>
+            <div class="nav-links">
+                <a href="#rent">Rent a Bike</a>
+                <a href="#how-it-works">How it Works</a>
+                <a href="#list-bike" class="btn btn-outline">List Your Bike</a>
+                <a href="#" id="login-btn" class="btn btn-primary">Login</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">🚀 The new way to rent</div>
+            <h1>Skip the Hassle.<br>Rent Directly from <span class="highlight-text">Owners.</span></h1>
+            <p>Why pay ₹800/day with strict boundaries? Rent bikes affordably from people near you, or earn cash by listing your idle ride.</p>
+            
+            <div class="search-box glass-panel">
+                <div class="input-group">
+                    <label>Location</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" placeholder="City or neighborhood" id="location-input">
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="input-group">
+                    <label>Date</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-calendar-days"></i>
+                        <input type="date" id="date-input">
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="input-group">
+                    <label>Ride Type</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-motorcycle"></i>
+                        <select id="bike-type">
+                            <option value="all">Any Bike</option>
+                            <option value="scooter">Scooter (Activa, Jupiter)</option>
+                            <option value="commuter">Commuter (Splendor, Shine)</option>
+                            <option value="sports">Sports (R15, Duke)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-search" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <strong>5,000+</strong>
+                    <span>Bikes Listed</span>
+                </div>
+                <div class="stat-item">
+                    <strong>₹250/day</strong>
+                    <span>Starting Price</span>
+                </div>
+                <div class="stat-item">
+                    <strong>Zero</strong>
+                    <span>Deposit (Most bookings)</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <div class="glass-blob blob-1"></div>
+            <div class="glass-blob blob-2"></div>
+            <div class="hero-card glass-panel">
+                <div class="owner-tag">
+                    <img src="https://i.pravatar.cc/150?img=33" alt="Owner" class="owner-avatar">
+                    <span>Ravi's Royal Enfield</span>
+                </div>
+                <div class="hero-icon-wrapper">
+                     <i class="fa-solid fa-motorcycle hero-main-icon"></i>
+                </div>
+                <div class="hero-card-bottom">
+                    <div class="price">
+                        <span class="amount">₹500</span>/day
+                    </div>
+                    <button class="btn btn-sm btn-primary">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-badge">Simple Process</div>
+        <h2>How GoGrab Works</h2>
+        <div class="steps-container">
+            <div class="step-card glass-panel">
+                <div class="step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <h3>1. Find a Bike</h3>
+                <p>Search for bikes near you. Filter by type, price, and dates to find your perfect ride.</p>
+            </div>
+            <div class="step-connector"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="step-card glass-panel">
+                <div class="step-icon"><i class="fa-regular fa-handshake"></i></div>
+                <h3>2. Book & Connect</h3>
+                <p>Send a request to the owner. Chat, confirm details, and pay securely through the app.</p>
+            </div>
+            <div class="step-connector"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="step-card glass-panel">
+                <div class="step-icon"><i class="fa-solid fa-key"></i></div>
+                <h3>3. Ride Away</h3>
+                <p>Meet the owner, quickly inspect the bike, grab the keys, and enjoy your journey!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="rent" class="featured-bikes">
+        <div class="section-header">
+            <div>
+                <div class="section-badge">Explore</div>
+                <h2>Available Near You</h2>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="scooter">Scooters</button>
+                <button class="filter-btn" data-filter="commuter">Commuters</button>
+                <button class="filter-btn" data-filter="sports">Sports & Cruisers</button>
+            </div>
+        </div>
+        
+        <div class="bikes-grid" id="bikes-grid">
+            <!-- Bikes will be injected here via JavaScript -->
+        </div>
+    </section>
+
+    <section id="list-bike" class="cta-section">
+        <div class="cta-content glass-panel gradient-border">
+            <div class="cta-text">
+                <div class="section-badge accent">For Owners</div>
+                <h2>Got a Bike Gathering Dust?</h2>
+                <p>Turn your idle two-wheeler into an earning machine. List it on GoGrab, set your own rules and prices, and start making up to ₹15,000 extra per month.</p>
+                <ul class="cta-benefits">
+                    <li><i class="fa-solid fa-shield-check"></i> ₹1,00,000 comprehensive insurance cover</li>
+                    <li><i class="fa-solid fa-user-check"></i> Verified riders only (Aadhar + DL checked)</li>
+                    <li><i class="fa-solid fa-wallet"></i> Keep up to 90% of your earnings</li>
+                </ul>
+                <button class="btn btn-primary btn-large cta-btn">
+                    List My Bike Now <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                
+                <!-- Hidden Form that appears when clicking the button above -->
+                <div id="list-bike-form-container" class="glass-panel" style="display: none; margin-top: 2rem; padding: 1.5rem;">
+                    <h3 style="margin-bottom: 1rem;">Bike Details</h3>
+                    <form id="list-bike-form" style="display: flex; flex-direction: column; gap: 15px;">
+                        <div class="input-wrapper" style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                            <input type="text" id="lb-title" required placeholder="Bike Name (e.g. Royal Enfield 350)" style="width: 100%;">
+                        </div>
+                        <div class="input-wrapper" style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                            <select id="lb-type" style="width: 100%;">
+                                <option value="scooter">Scooter</option>
+                                <option value="commuter">Commuter</option>
+                                <option value="sports">Sports</option>
+                            </select>
+                        </div>
+                        <!-- Price is now automatically calculated based on bike type -->
+                        <div class="input-wrapper" style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                            <input type="text" id="lb-location" required placeholder="Location Area (e.g. Indiranagar)" style="width: 100%;">
+                        </div>
+                        <div class="input-wrapper" style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                            <input type="email" id="lb-owner-email" required placeholder="Your Email (shown to renters)" style="width: 100%;">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Submit Listing</button>
+                    </form>
+                </div>
+            </div>
+            <div class="cta-image">
+                <div class="earning-card glass-panel">
+                    <div class="earning-header">
+                        <i class="fa-solid fa-chart-line"></i> Estimated Monthly Earnings
+                    </div>
+                    <div class="earning-amount">₹12,500</div>
+                    <div class="earning-desc">Based on 15 days of rental for a 150cc bike.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    Go<span class="highlight">Grab</span>
+                </a>
+                <p>The smartest, most affordable way to rent and share rides. A true peer-to-peer community.</p>
+                <div class="social-links">
+                    <a href="#" class="glass-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="glass-icon"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="glass-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Renters</h4>
+                <ul>
+                    <li><a href="#">Find a Bike</a></li>
+                    <li><a href="#">Trust & Safety</a></li>
+                    <li><a href="#">Cancellation Policy</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Owners</h4>
+                <ul>
+                    <li><a href="#">List your Vehicle</a></li>
+                    <li><a href="#">Owner Insurance</a></li>
+                    <li><a href="#">Earnings Calculator</a></li>
+                    <li><a href="#">Owner Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GoGrab Rentals. Designed for the community.</p>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="booking-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 999;"></div>
+    <div id="booking-modal" class="glass-panel" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; width: 90%; max-width: 400px; padding: 2rem;">
+        <h3 style="margin-bottom: 0.3rem;">Confirm Booking</h3>
+        <p style="color: #10b981; font-size: 0.85rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-envelope"></i> Owner will be notified by email</p>
+        <p id="booking-bike-title" style="margin-bottom: 1rem; color: #94a3b8; font-weight: 500;"></p>
+        
+        <div style="margin-bottom: 1rem;">
+            <label style="display:block; margin-bottom: 5px; color:#cbd5e1; font-size: 0.9rem;">Start Date</label>
+            <input type="date" id="booking-start-date" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display:block; margin-bottom: 5px; color:#cbd5e1; font-size: 0.9rem;">End Date</label>
+            <input type="date" id="booking-end-date" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem;">
+            <span style="color: #94a3b8;">Estimated Cost</span>
+            <span id="booking-total-price" style="font-size: 1.5rem; font-weight: bold; color: #fff;">₹0</span>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <button id="cancel-booking-btn" class="btn" style="flex: 1; background: rgba(255,255,255,0.1); color: white;">Cancel</button>
+            <button id="pay-booking-btn" class="btn btn-primary" style="flex: 1;">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

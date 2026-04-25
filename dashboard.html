@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | GoGrab</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <nav class="navbar" style="background: rgba(11, 15, 25, 0.95); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-motorcycle"></i>
+                Go<span class="highlight">Grab</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Find a Bike</a>
+                <a href="#" id="logout-btn" class="btn btn-outline" style="border-color: #ef4444; color: #ef4444;">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding: 120px 20px 40px; max-width: 1200px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+            <h1 style="color: white; font-size: 2.5rem;">User Dashboard</h1>
+            <div id="user-info" style="color: #94a3b8; font-weight: 500;">...</div>
+        </div>
+        
+        <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem;">
+            <!-- Bookings Section -->
+            <div class="glass-panel" style="padding: 2rem;">
+                <h2 style="color: white; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-calendar-check" style="color: #3b82f6;"></i> My Bookings
+                </h2>
+                <div id="my-bookings-container">
+                    <p style="color: #94a3b8;">Loading your past bookings...</p>
+                </div>
+            </div>
+
+            <!-- Listed Bikes Section -->
+            <div class="glass-panel" style="padding: 2rem;">
+                <h2 style="color: white; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-motorcycle" style="color: #10b981;"></i> My Listed Bikes
+                </h2>
+                <div id="my-bikes-container">
+                    <p style="color: #94a3b8;">Loading bikes you've listed...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>
