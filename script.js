@@ -3,6 +3,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { openMap, closeMap } from "./live-map.js";
 
 // TODO: Replace with your actual Firebase config from the Firebase Console
 const firebaseConfig = {
@@ -196,6 +197,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             navbar.style.boxShadow = 'none';
         }
     });
+
+    // View Map Button in Search Box
+    const viewMapBtn = document.getElementById('view-map-btn');
+    if (viewMapBtn) {
+        viewMapBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openMap();
+        });
+    }
 });
 
 function renderBikes(bikes) {
@@ -256,14 +266,25 @@ bikesGrid.addEventListener('click', (e) => {
         currentBookingBike = allBikes.find(b => b.id === bikeId || b.id == bikeId);
         
         if (currentBookingBike) {
-            document.getElementById('booking-bike-title').textContent = `Booking: ${currentBookingBike.title}`;
-            document.getElementById('booking-bike-price').textContent = `₹${currentBookingBike.price}/day`;
-            bookingStartDate.value = '';
-            bookingEndDate.value = '';
-            bookingTotalPrice.textContent = '₹0';
+            // Show Live Map first for the Uber experience
+            openMap();
             
-            bookingModal.style.display = 'block';
-            bookingOverlay.style.display = 'block';
+            // Change status text on map
+            const countEl = document.getElementById('nearby-count');
+            if (countEl) countEl.textContent = "Connecting to " + currentBookingBike.title;
+            
+            // After 2.5 seconds of "simulated searching", show the booking modal
+            setTimeout(() => {
+                closeMap();
+                document.getElementById('booking-bike-title').textContent = `Booking: ${currentBookingBike.title}`;
+                document.getElementById('booking-bike-price').textContent = `₹${currentBookingBike.price}/day`;
+                bookingStartDate.value = '';
+                bookingEndDate.value = '';
+                bookingTotalPrice.textContent = '₹0';
+                
+                bookingModal.style.display = 'block';
+                bookingOverlay.style.display = 'block';
+            }, 2500);
         }
     }
 });

@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
     <nav class="navbar">
@@ -66,6 +68,7 @@
                     </div>
                 </div>
                 <button class="btn btn-search" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="btn btn-outline" id="view-map-btn" style="margin-left: 10px; padding: 12px; border-radius: 12px;"><i class="fa-solid fa-map-location-dot"></i></button>
             </div>
             
             <div class="stats">
@@ -274,8 +277,26 @@
         </div>
     </div>
 
+    <!-- Map Overlay -->
+    <div id="map-overlay" class="map-overlay" style="display: none;">
+        <div class="map-container-wrapper">
+            <div id="live-map"></div>
+            <div class="map-status-card glass-panel">
+                <div class="status-header">
+                    <span class="pulse-icon"></span>
+                    <span>Live Bikes Near You</span>
+                </div>
+                <div id="nearby-count" class="nearby-count">Searching...</div>
+                <p>Real-time vehicle movement enabled</p>
+                <button id="close-map-btn" class="btn btn-sm btn-primary">Close Map</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script type="module" src="live-map.js"></script>
     <script type="module" src="script.js"></script>
 </body>
 </html>
