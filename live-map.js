@@ -82,7 +82,7 @@ let map = null;
 let vehicles = [];
 let animationId = null;
 
-export function initLiveMap(centerLat = 12.9716, centerLng = 77.5946) {
+export function initLiveMap(centerLat = 12.9716, centerLng = 77.5946, isOwner = false) {
     if (map) return;
 
     map = L.map('live-map', {
@@ -100,13 +100,23 @@ export function initLiveMap(centerLat = 12.9716, centerLng = 77.5946) {
         position: 'bottomright'
     }).addTo(map);
 
-    // Add user marker
-    const userIcon = L.divIcon({
-        className: 'user-location-marker',
-        html: '<div style="width: 15px; height: 15px; background: #3b82f6; border: 3px solid white; border-radius: 50%; box-shadow: 0 0 15px #3b82f6;"></div>',
-        iconSize: [15, 15]
-    });
-    L.marker([centerLat, centerLng], { icon: userIcon }).addTo(map);
+    if (isOwner) {
+        // Add owner marker
+        const ownerIcon = L.divIcon({
+            className: 'owner-location-marker',
+            html: '<div style="width: 25px; height: 25px; background: #10b981; border: 3px solid white; border-radius: 50%; box-shadow: 0 0 20px #10b981; display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-motorcycle" style="color:white; font-size:12px;"></i></div>',
+            iconSize: [25, 25]
+        });
+        L.marker([centerLat, centerLng], { icon: ownerIcon }).addTo(map);
+    } else {
+        // Add user marker
+        const userIcon = L.divIcon({
+            className: 'user-location-marker',
+            html: '<div style="width: 15px; height: 15px; background: #3b82f6; border: 3px solid white; border-radius: 50%; box-shadow: 0 0 15px #3b82f6;"></div>',
+            iconSize: [15, 15]
+        });
+        L.marker([centerLat, centerLng], { icon: userIcon }).addTo(map);
+    }
 
     // Spawn initial vehicles
     spawnVehicles(centerLat, centerLng);
@@ -140,22 +150,33 @@ function startSimulation() {
     animate();
 }
 
-export function openMap() {
+export function openMap(targetLat = null, targetLng = null) {
     const overlay = document.getElementById('map-overlay');
     overlay.style.display = 'flex';
     
+    if (targetLat !== null && targetLng !== null) {
+        initLiveMap(targetLat, targetLng, true);
+        if (map) {
+            map.setView([targetLat, targetLng], 15);
+        }
+        return;
+    }
+
     // Default to Bangalore Koramangala if geolocation fails
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (pos) => {
-                initLiveMap(pos.coords.latitude, pos.coords.longitude);
+                initLiveMap(pos.coords.latitude, pos.coords.longitude, false);
+                if (map) map.setView([pos.coords.latitude, pos.coords.longitude], 15);
             },
             () => {
-                initLiveMap(12.9352, 77.6245); // Koramangala
+                initLiveMap(12.9352, 77.6245, false); // Koramangala
+                if (map) map.setView([12.9352, 77.6245], 15);
             }
         );
     } else {
-        initLiveMap(12.9352, 77.6245);
+        initLiveMap(12.9352, 77.6245, false);
+        if (map) map.setView([12.9352, 77.6245], 15);
     }
 }
 

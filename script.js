@@ -53,10 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             loginBtn.textContent = "Login";
             loginBtn.onclick = (e) => {
                 e.preventDefault();
-                signInWithPopup(auth, provider).catch(error => {
-                    console.error("Login Error. Ensure Firebase Config & Google Auth are enabled.", error);
-                    alert("⚠️ Firebase Auth Error: Please ensure you pasted your API keys and enabled Google Sign-In in the Firebase Console.");
-                });
+                window.location.href = 'login.html';
             };
         }
     });
@@ -256,6 +253,24 @@ const bookingStartDate = document.getElementById('booking-start-date');
 const bookingEndDate = document.getElementById('booking-end-date');
 const bookingTotalPrice = document.getElementById('booking-total-price');
 
+const locationCoordinates = {
+    "Koramangala": { lat: 12.9352, lng: 77.6245 },
+    "Indiranagar": { lat: 12.9716, lng: 77.6411 },
+    "HSR Layout": { lat: 12.9121, lng: 77.6446 },
+    "BTM Layout": { lat: 12.9166, lng: 77.6101 },
+    "Whitefield": { lat: 12.9698, lng: 77.7499 },
+    "Jayanagar": { lat: 12.9299, lng: 77.5933 },
+    "Marathahalli": { lat: 12.9569, lng: 77.7011 }
+};
+
+function getCoordinatesForLocation(locationName) {
+    if (!locationName) return null;
+    for (const [key, coords] of Object.entries(locationCoordinates)) {
+        if (locationName.toLowerCase().includes(key.toLowerCase())) return coords;
+    }
+    return { lat: 12.9716, lng: 77.5946 }; // Default Bangalore
+}
+
 bikesGrid.addEventListener('click', (e) => {
     if (e.target.classList.contains('book-now-btn')) {
         if (!auth.currentUser) {
@@ -266,8 +281,14 @@ bikesGrid.addEventListener('click', (e) => {
         currentBookingBike = allBikes.find(b => b.id === bikeId || b.id == bikeId);
         
         if (currentBookingBike) {
+            const coords = getCoordinatesForLocation(currentBookingBike.location);
+            
             // Show Live Map first for the Uber experience
-            openMap();
+            if (coords) {
+                openMap(coords.lat, coords.lng);
+            } else {
+                openMap();
+            }
             
             // Change status text on map
             const countEl = document.getElementById('nearby-count');
